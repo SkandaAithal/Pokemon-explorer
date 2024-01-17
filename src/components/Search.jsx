@@ -26,7 +26,7 @@ function Search() {
       const { data } = await axios.get(
         `https://pokeapi.co/api/v2/pokemon/${search}`
       );
-      console.log(data);
+
       setPokemonData({
         name: data.name,
         image: data.sprites.other.home.front_default,

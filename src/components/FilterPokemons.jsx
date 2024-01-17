@@ -50,7 +50,6 @@ function FilterPokemons({ setIsFilter }) {
         payload: { type: api1, habitat: api2, color: api3 },
       });
     } catch (error) {
-      console.log(error);
     } finally {
       dispatchFilter({ type: "END_LOADING" });
     }

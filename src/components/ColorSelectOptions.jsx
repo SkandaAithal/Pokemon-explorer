@@ -34,7 +34,7 @@ function ColorSelectOptions({ dispatchFilter, isLoading, colorArray = [] }) {
       const { data } = await axios.get(
         `https://pokeapi.co/api/v2/pokemon-color/${item}`
       );
-      console.log(data);
+   
       getPokemonDataArray(data.pokemon_species);
     } catch (error) {
     } finally {

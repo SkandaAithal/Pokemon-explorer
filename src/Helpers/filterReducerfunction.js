@@ -79,6 +79,33 @@ const filterReducerFunction = (state, action) => {
         filteredDataArrayType: [],
         filteredDataArrayHabitat: [],
         filteredDataArrayColor: [],
+        color: "",
+        ability: "",
+        habitat: "",
+        type: "",
+      };
+    case "ABILITY":
+      return {
+        ...state,
+        ability: action.payload,
+      };
+
+    case "TYPE":
+      return {
+        ...state,
+        type: action.payload,
+      };
+
+    case "COLOR":
+      return {
+        ...state,
+        color: action.payload,
+      };
+
+    case "HABITAT":
+      return {
+        ...state,
+        habitat: action.payload,
       };
   }
 };

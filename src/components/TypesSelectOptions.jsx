@@ -2,9 +2,13 @@ import axios from "axios";
 import React, { useState } from "react";
 import styled from "styled-components";
 
-function TypesSelectOptions({ dispatchFilter, isLoading, typeArray = [] }) {
+function TypesSelectOptions({
+  dispatchFilter,
+  isLoading,
+  typeArray = [],
+  type,
+}) {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(null);
 
   const handleButtonClick = () => {
     setIsOpen(!isOpen);
@@ -28,7 +32,7 @@ function TypesSelectOptions({ dispatchFilter, isLoading, typeArray = [] }) {
       // ! to clear the previous array and add new array based on the filter.
 
       dispatchFilter({ type: "CLEAR_DATA_TYPE" });
-      setSelectedOption(item);
+      dispatchFilter({ type: "TYPE", payload: item });
       setIsOpen(false);
 
       const { data } = await axios.get(
@@ -58,9 +62,7 @@ function TypesSelectOptions({ dispatchFilter, isLoading, typeArray = [] }) {
           </List>
         )}
 
-        {selectedOption && (
-          <SelectedOption>You selected: {selectedOption}</SelectedOption>
-        )}
+        {type && <SelectedOption>You selected: {type}</SelectedOption>}
       </div>
     </div>
   );

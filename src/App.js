@@ -16,6 +16,7 @@ function App() {
           <Route path="/pokemonslist" element={<PokemonList />} />
           <Route path="/favourites" element={<FavouritePokemons />} />
           <Route path="/singlepokemon/:name" element={<SinglePokemon />} />
+          <Route path="*" element={<Search />} />
         </Routes>
       </BrowserRouter>
     </div>

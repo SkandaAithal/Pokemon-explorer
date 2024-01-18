@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useReducer, useRef, useState } from "react";
 import styled from "styled-components";
 
-function AbilitiesSelectOption({ dispatchFilter, isLoading }) {
+function AbilitiesSelectOption({ dispatchFilter, isLoading, ability }) {
   const initialState = {
     isAbilityLoading: false,
     abilityOffset: 0,
@@ -10,7 +10,6 @@ function AbilitiesSelectOption({ dispatchFilter, isLoading }) {
     abilityCount: 0,
   };
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(null);
   const listRef = useRef(null);
 
   const reducerFunctionAbility = (state, action) => {
@@ -75,8 +74,9 @@ function AbilitiesSelectOption({ dispatchFilter, isLoading }) {
       else {
         dispatchFilter({ type: "LOADING" });
         // ! to clear the previous array and add new array based on the filter.
+        dispatchFilter({ type: "ABILITY", payload: item });
         dispatchFilter({ type: "CLEAR_DATA_ABILITY" });
-        setSelectedOption(item);
+
         setIsOpen(false);
 
         const { data } = await axios.get(
@@ -119,9 +119,7 @@ function AbilitiesSelectOption({ dispatchFilter, isLoading }) {
           ))}
         </List>
       )}
-      {selectedOption && (
-        <SelectedOption>You selected: {selectedOption}</SelectedOption>
-      )}
+      {ability && <SelectedOption>You selected: {ability}</SelectedOption>}
     </div>
   );
 }

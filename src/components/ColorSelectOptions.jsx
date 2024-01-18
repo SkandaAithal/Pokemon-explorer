@@ -2,9 +2,13 @@ import axios from "axios";
 import React, { useState } from "react";
 import styled from "styled-components";
 
-function ColorSelectOptions({ dispatchFilter, isLoading, colorArray = [] }) {
+function ColorSelectOptions({
+  dispatchFilter,
+  isLoading,
+  colorArray = [],
+  color,
+}) {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(null);
 
   const handleButtonClick = () => {
     setIsOpen(!isOpen);
@@ -23,18 +27,19 @@ function ColorSelectOptions({ dispatchFilter, isLoading, colorArray = [] }) {
   // ! on the list item click we fire an api call which returns an array of objects which contains api url of each pokemon
 
   const handleItemClick = async (item) => {
+    if (isLoading) return;
     try {
       dispatchFilter({ type: "LOADING" });
-      setSelectedOption(item);
-      // ! to clear the previous array and add new array based on the filter.
+      dispatchFilter({ type: "COLOR", payload: item });
 
+      // ! to clear the previous array and add new array based on the filter.
       dispatchFilter({ type: "CLEAR_DATA_COLOR" });
       setIsOpen(false);
 
       const { data } = await axios.get(
         `https://pokeapi.co/api/v2/pokemon-color/${item}`
       );
-   
+
       getPokemonDataArray(data.pokemon_species);
     } catch (error) {
     } finally {
@@ -56,9 +61,7 @@ function ColorSelectOptions({ dispatchFilter, isLoading, colorArray = [] }) {
           </List>
         )}
 
-        {selectedOption && (
-          <SelectedOption>You selected: {selectedOption}</SelectedOption>
-        )}
+        {color && <SelectedOption>You selected: {color}</SelectedOption>}
       </div>
     </div>
   );

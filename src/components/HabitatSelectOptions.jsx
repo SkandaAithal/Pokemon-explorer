@@ -6,9 +6,9 @@ function HabitatSelectOptions({
   dispatchFilter,
   isLoading,
   habitatArray = [],
+  habitat,
 }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(null);
   const handleButtonClick = () => {
     setIsOpen(!isOpen);
   };
@@ -27,7 +27,7 @@ function HabitatSelectOptions({
   const handleItemClick = async (item) => {
     if (isLoading) return;
     try {
-      setSelectedOption(item);
+      dispatchFilter({ type: "HABITAT", payload: item });
       dispatchFilter({ type: "LOADING" });
       setIsOpen(false);
       // ! to clear the previous array and add new array based on the filter.
@@ -62,9 +62,7 @@ function HabitatSelectOptions({
           </List>
         )}
 
-        {selectedOption && (
-          <SelectedOption>You selected: {selectedOption}</SelectedOption>
-        )}
+        {habitat && <SelectedOption>You selected: {habitat}</SelectedOption>}
       </div>
     </div>
   );

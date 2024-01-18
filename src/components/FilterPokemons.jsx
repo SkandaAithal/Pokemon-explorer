@@ -24,6 +24,10 @@ function FilterPokemons({ setIsFilter }) {
     filteredDataArrayType: [],
     filteredDataArrayHabitat: [],
     filteredDataArrayColor: [],
+    color: "",
+    ability: "",
+    habitat: "",
+    type: "",
   };
 
   //   ! usereducer hook
@@ -78,6 +82,10 @@ function FilterPokemons({ setIsFilter }) {
     []
   );
 
+  const clearFilter = () => {
+    if (state.isLoading) return;
+    dispatchFilter({ type: "CLEAR_FILTER" });
+  };
   useEffect(() => {
     getAllFilterData();
   }, []);
@@ -88,23 +96,27 @@ function FilterPokemons({ setIsFilter }) {
         <AbilitiesSelectOption
           dispatchFilter={dispatchFilter}
           isLoading={state.isLoading}
+          ability={state.ability}
         />
 
         <TypesSelectOptions
           dispatchFilter={dispatchFilter}
           isLoading={state.isLoading}
           typeArray={state.typeArray}
+          type={state.type}
         />
 
         <HabitatSelectOptions
           dispatchFilter={dispatchFilter}
           isLoading={state.isLoading}
           habitatArray={state.habitatArray}
+          habitat={state.habitat}
         />
         <ColorSelectOptions
           dispatchFilter={dispatchFilter}
           isLoading={state.isLoading}
           colorArray={state.colorArray}
+          color={state.color}
         />
       </FilterOptions>
 
@@ -116,11 +128,7 @@ function FilterPokemons({ setIsFilter }) {
           gap: "1rem",
         }}
       >
-        <ClearFilterButton
-          onClick={() => {
-            dispatchFilter({ type: "CLEAR_FILTER" });
-          }}
-        >
+        <ClearFilterButton onClick={clearFilter}>
           Clear Filter
         </ClearFilterButton>
         <GoToList

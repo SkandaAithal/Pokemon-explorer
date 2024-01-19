@@ -21,20 +21,20 @@ Get started with Pokémon Explorer on your local machine by following these step
 
 2. **Navigate to the project folder:**
 
-```bash
-cd pokemon-explorer
-```
+   ```bash
+   cd pokemon-explorer
+   ```
 
 3. **Install dependencies:**
 
-```bash
-npm install
-```
+   ```bash
+   npm install
+   ```
 
 4. **Run Project:**
 
-```bash
-npm start
-```
+   ```bash
+   npm start
+   ```
 
 Now you're ready to explore the world of Pokémon with Pokémon Explorer! 🎉🎮
